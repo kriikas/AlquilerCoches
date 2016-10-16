@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context antiJARLocking="true" path="/AlquilerCoches">
+  <Resource auth="Container" 
+  	driverClassName="com.mysql.jdbc.Driver"
+   	maxActive="8"
+   	maxIdle="4"
+   	name="jdbc/cochesSpring" 
+    type="javax.sql.DataSource"
+    url="jdbc:mysql://localhost/cochesSpring" 
+    username="root"
+    password="root"
+   />
+</Context>

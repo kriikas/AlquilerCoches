@@ -1,0 +1,6 @@
+/.hg/
+/.settings/
+/target/
+/.classpath
+/.project
+/.springBeans
