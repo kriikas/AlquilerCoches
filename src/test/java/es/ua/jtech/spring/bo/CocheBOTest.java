@@ -1,4 +1,4 @@
-package es.jtech.ua.spring.bo;
+package es.ua.jtech.spring.bo;
 
 import static org.junit.Assert.assertEquals;
 

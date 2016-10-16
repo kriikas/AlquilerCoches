@@ -70,7 +70,7 @@
     </filter-mapping>
     
     <!-- Spring security sesión 7 -->
-    <!-- 
+ 
     <filter>
     	<filter-name>springSecurityFilterChain</filter-name>
     	<filter-class>
@@ -93,5 +93,5 @@
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-	 -->
+	
 </web-app>
