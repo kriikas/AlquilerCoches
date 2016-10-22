@@ -3,9 +3,10 @@
     Created on : 05-may-2010, 23:30:43
     Author     : especialista
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,7 @@
     <body>
     	<a href="?locale=en_us">Inglés</a>
     	<a href="?locale=es_es">Castellano</a>
+    	<a href="logout">Salir</a>
         <h1>Coches en alquiler</h1>
         <table>
             <thead>
@@ -37,7 +39,9 @@
                     <td>${coche.modelo}</td>
                     <td><fmt:formatDate dateStyle="SHORT" value="${coche.fechaMatriculacion}"/> </td> <td>${coche.km}</td>
                     <td><spring:eval expression="coche.precio" /> </td>
-                    <td> <a href="editar.do?matricula=${coche.matricula}">Editar</a> </td>
+                    <sec:authorize access="hasRole('ROLE_GESTOR')">
+                    	<td> <a href="editar.do?matricula=${coche.matricula}">Editar</a> </td>
+                    </sec:authorize>
                 </tr>
             </c:forEach>
             </tbody>

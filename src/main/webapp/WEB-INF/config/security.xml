@@ -7,16 +7,22 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
-	<http auto-config="true">
-		<intercept-url pattern="/listar.do" access="ROLE_USUARIO" />
-		<intercept-url pattern="/**" access="ROLE_GESTOR" />
+	<http pattern="/login.do" security="none"/>
+	<http use-expressions="true">
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USUARIO', 'ROLE_GESTOR')" />
+		<form-login login-page="/login.do" default-target-url="/listar.do" />
+		<logout logout-url="/logout" logout-success-url="/login.do"/>
 	</http>
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider>
-			<user-service>
-				<user authorities="ROLE_USUARIO" name="usuario" password="usuario" />
-				<user authorities="ROLE_GESTOR" name="gestor" password="gestor" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider user-service-ref="miUserServiceJDBC" />
 	</authentication-manager>
+	
+	<beans:bean id="miUserServiceJDBC" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+		<beans:property name="dataSource" ref="miDataSource"/>
+		<beans:property name="usersByUsernameQuery"
+			value="SELECT login as username, password, true as enabled FROM usuarios WHERE login=?"/>
+		<beans:property name="authoritiesByUsernameQuery"
+			value="SELECT login as username, rol as authority FROM roles WHERE login=?"/>
+	</beans:bean>
+	<global-method-security pre-post-annotations="enabled"/>
 </beans:beans>

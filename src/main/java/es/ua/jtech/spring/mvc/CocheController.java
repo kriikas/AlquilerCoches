@@ -27,8 +27,12 @@ public class CocheController {
 
     @Autowired
     private ICocheBO bo;
-
-
+    
+    @RequestMapping("/login.do")
+    public String login(Model modelo) {
+		return "login";
+	}
+    
     /*---------------------- LISTAR TODOS LOS COCHES  -----------------------------------------*/
     @RequestMapping("/listar.do")
     public String listar(Model modelo, 

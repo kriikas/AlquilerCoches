@@ -3,6 +3,8 @@ package es.ua.jtech.spring.negocio;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PostFilter;
+
 import es.ua.jtech.spring.modelo.Coche;
 
 /**
@@ -12,6 +14,7 @@ import es.ua.jtech.spring.modelo.Coche;
 public interface ICocheBO {
 	public void crear(Coche coche);
 	public void actualizar(Coche coche);
+	@PostFilter("filterObject.getKm() > 1000 or hasRole('ROLE_GESTOR')")
 	public List<Coche> listar();
 	public List<Coche> listarPosterioresA(Date fecha);
 	public Coche obtener(String matricula);
